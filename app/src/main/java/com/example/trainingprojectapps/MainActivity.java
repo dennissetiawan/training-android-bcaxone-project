@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recycler_view);
         presidentAdapter = new PresidentAdapter(presidentsDataArrayList,
-                item -> showSnackBar(item.getName() +" " +item.getTerm_began() ));
+                item -> showSnackBar(item.getName() +" " +item.getTermBeginToString() ));
         recyclerView.setAdapter(presidentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

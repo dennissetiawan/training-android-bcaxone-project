@@ -1,41 +1,64 @@
 package com.example.trainingprojectapps.model;
 
+import java.security.InvalidParameterException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 public class President {
     private String name;
-    private String term_began;
-    private String term_end;
+    private Date termBegin;
+    private Date termEnd;
 
-    public President(String name, String term_began, String term_end) {
-        this.name = name;
-        this.term_began = term_began;
-        this.term_end = term_end;
-    }
-
-    public String getName() {
-        return name;
-    }
-
+    private SimpleDateFormat dateFormatter = new SimpleDateFormat("MMMM d, yyyy");
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getTerm_began() {
-        return term_began;
+    public String getTermBeginToString() {
+        return dateFormatter.format(termBegin);
     }
 
-    public void setTerm_began(String term_began) {
-        this.term_began = term_began;
+    public void setTermBegin(Date termBegin) {
+        this.termBegin = termBegin;
     }
 
-    public String getTerm_end() {
-        return term_end;
+    public String getTermEndToString() {
+        return termEnd==null?"":dateFormatter.format(termEnd);
     }
 
-    public void setTerm_end(String term_end) {
-        this.term_end = term_end;
+    public void setTermEnd(Date termEnd) {
+        this.termEnd = termEnd;
+    }
+
+    public President(String name,  String termBegin, String termEnd) {
+
+        try {
+            if (termBegin == null) {
+                throw new InvalidParameterException("term begin cannot be null");
+            }
+            if (name == null) {
+                throw new InvalidParameterException("name cannot be null");
+            }
+            this.name = name;
+            this.termBegin = dateFormatter.parse(termBegin);
+            this.termEnd = dateFormatter.parse(termEnd);
+
+        }catch (InvalidParameterException e){
+            throw e;
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public String getName() {
+        return name;
     }
 
     public static ArrayList<President> generateDataItem(){

@@ -25,14 +25,12 @@ public class PresidentAdapter extends RecyclerView.Adapter<PresidentViewHolder> 
         this.listener = listener;
     }
 
-
     @NonNull
     @Override
     public PresidentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.president_item,parent,false);
         return new PresidentViewHolder(view);
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull PresidentViewHolder holder, int position) {
@@ -61,8 +59,8 @@ class PresidentViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(final President item, final OnItemClickListener listener) {
         nameTextView.setText(item.getName());
-        startTermTextView.setText(item.getTerm_began());
-        endTermTextView.setText(item.getTerm_end());
+        startTermTextView.setText(item.getTermBeginToString());
+        endTermTextView.setText(item.getTermEndToString());
         itemView.setOnClickListener(v -> listener.onItemClick(item));
     }
 }
