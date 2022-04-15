@@ -3,16 +3,29 @@ package com.example.trainingprojectapps.model;
 import java.security.InvalidParameterException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
+@Entity
 public class President {
+    @PrimaryKey(autoGenerate = true)
+    public int presidentID;
+
+    @ColumnInfo(name = "name")
     private String name;
+
+    @ColumnInfo(name = "term_begin")
     private Date termBegin;
+    @ColumnInfo(name = "term_end")
     private Date termEnd;
 
     private SimpleDateFormat dateFormatter = new SimpleDateFormat("MMMM d, yyyy");
+
     public void setName(String name) {
         this.name = name;
     }
